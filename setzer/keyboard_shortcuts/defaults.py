@@ -1,6 +1,21 @@
 #!/usr/bin/env python3
 # coding: utf-8
 
+# Note: For non-literal characters, use their descriptive names.
+# This is required for correct parsing by the GTK shortcut system.
+#
+# | Character | Name       |
+# | --------- | ---------- |
+# | ?         | question   |
+# | /         | slash      |
+# | +         | plus       |
+# | -         | minus      |
+# | "         | quotedbl   |
+# | Tab       | Tab        |
+# | Return    | Return     |
+# | Escape    | Escape     |
+# | Space     | space      |
+
 DEFAULT_KEYBINDS = {
     'app': {
         'new-latex-document': ['Ctrl', 'N'],
