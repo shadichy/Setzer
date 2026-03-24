@@ -54,7 +54,8 @@ class ShortcutControllerLaTeX(ShortcutController):
         self.set_accels_for_insert_symbol_action(['\\\\\n'], ['<Control>Return'])
 
         latex_keybinds = KeybindParser.get_category_keybinds('latex')
-        for shortcut, action_name in latex_keybinds.items():
+        for action_name, shortcut_array in latex_keybinds.items():
+            shortcut = KeybindParser.to_gtk(shortcut_array)
             if action_name in self.actions.actions:
                 self.create_and_add_shortcut(shortcut, self.actions.actions[action_name].activate)
             elif hasattr(self, action_name):

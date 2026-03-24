@@ -31,9 +31,9 @@ class KeyboardShortcutsDialog(object):
         data = list()
 
         def add_item(section, title, action_name, category=None):
-            shortcut = KeybindParser.get_shortcut(action_name, category)
-            if shortcut:
-                shortcut = shortcut.replace('<', '&lt;').replace('>', '&gt;')
+            shortcut_array = KeybindParser.get_shortcut(action_name, category)
+            if shortcut_array:
+                shortcut = KeybindParser.to_display(shortcut_array)
                 section['items'].append({'title': title, 'shortcut': shortcut})
 
         section = {'title': _('Documents'), 'items': list()}
@@ -93,36 +93,36 @@ class KeyboardShortcutsDialog(object):
 
         section = {'title': _('Editing'), 'items': list()}
         section['items'].append({'title': _('Toggle insert / overwrite'), 'shortcut': 'Insert'})
-        section['items'].append({'title': _('Move current line up'), 'shortcut': '&lt;Alt&gt;Up'})
-        section['items'].append({'title': _('Move current line down'), 'shortcut': '&lt;Alt&gt;Down'})
-        section['items'].append({'title': _('Move current word left'), 'shortcut': '&lt;Alt&gt;Left'})
-        section['items'].append({'title': _('Move current word right'), 'shortcut': '&lt;Alt&gt;Right'})
-        section['items'].append({'title': _('Increment number at cursor'), 'shortcut': '&lt;ctrl&gt;&lt;shift&gt;A'})
-        section['items'].append({'title': _('Decrement number at cursor'), 'shortcut': '&lt;ctrl&gt;&lt;shift&gt;X'})
+        section['items'].append({'title': _('Move current line up'), 'shortcut': 'Alt+Up'})
+        section['items'].append({'title': _('Move current line down'), 'shortcut': 'Alt+Down'})
+        section['items'].append({'title': _('Move current word left'), 'shortcut': 'Alt+Left'})
+        section['items'].append({'title': _('Move current word right'), 'shortcut': 'Alt+Right'})
+        section['items'].append({'title': _('Increment number at cursor'), 'shortcut': 'Ctrl+Shift+A'})
+        section['items'].append({'title': _('Decrement number at cursor'), 'shortcut': 'Ctrl+Shift+X'})
         data.append(section)
 
         section = {'title': _('LaTeX Shortcuts'), 'items': list()}
         add_item(section, _('Comment / Uncomment current line(s)'), 'toggle-comment', 'latex')
         add_item(section, _('Quotation Marks'), 'shortcut_quotes', 'latex')
-        section['items'].append({'title': _('New Line') + ' (\\\\)', 'shortcut': '&lt;ctrl&gt;Return'})
-        section['items'].append({'title': _('Bold Text'), 'shortcut': '&lt;ctrl&gt;B'})
-        section['items'].append({'title': _('Italic Text'), 'shortcut': '&lt;ctrl&gt;I'})
-        section['items'].append({'title': _('Underlined Text'), 'shortcut': '&lt;ctrl&gt;U'})
-        section['items'].append({'title': _('Typewriter Text'), 'shortcut': '&lt;ctrl&gt;&lt;shift&gt;T'})
-        section['items'].append({'title': _('Emphasized Text'), 'shortcut': '&lt;ctrl&gt;&lt;shift&gt;E'})
-        section['items'].append({'title': _('List Item'), 'shortcut': '&lt;ctrl&gt;&lt;shift&gt;I'})
-        section['items'].append({'title': _('Environment'), 'shortcut': '&lt;ctrl&gt;E'})
+        section['items'].append({'title': _('New Line') + ' (\\\\)', 'shortcut': 'Ctrl+Return'})
+        section['items'].append({'title': _('Bold Text'), 'shortcut': 'Ctrl+B'})
+        section['items'].append({'title': _('Italic Text'), 'shortcut': 'Ctrl+I'})
+        section['items'].append({'title': _('Underlined Text'), 'shortcut': 'Ctrl+U'})
+        section['items'].append({'title': _('Typewriter Text'), 'shortcut': 'Ctrl+Shift+T'})
+        section['items'].append({'title': _('Emphasized Text'), 'shortcut': 'Ctrl+Shift+E'})
+        section['items'].append({'title': _('List Item'), 'shortcut': 'Ctrl+Shift+I'})
+        section['items'].append({'title': _('Environment'), 'shortcut': 'Ctrl+E'})
         data.append(section)
 
         section = {'title': _('Math Shortcuts'), 'items': list()}
-        section['items'].append({'title': _('Inline Math Section'), 'shortcut': '&lt;ctrl&gt;M'})
-        section['items'].append({'title': _('Display Math Section'), 'shortcut': '&lt;ctrl&gt;&lt;shift&gt;M'})
-        section['items'].append({'title': _('Equation'), 'shortcut': '&lt;ctrl&gt;&lt;shift&gt;N'})
-        section['items'].append({'title': _('Subscript'), 'shortcut': '&lt;ctrl&gt;&lt;shift&gt;D'})
-        section['items'].append({'title': _('Superscript'), 'shortcut': '&lt;ctrl&gt;&lt;shift&gt;U'})
-        section['items'].append({'title': _('Fraction'), 'shortcut': '&lt;alt&gt;&lt;shift&gt;F'})
-        section['items'].append({'title': '\\left', 'shortcut': '&lt;ctrl&gt;&lt;shift&gt;L'})
-        section['items'].append({'title': '\\right', 'shortcut': '&lt;ctrl&gt;&lt;shift&gt;R'})
+        section['items'].append({'title': _('Inline Math Section'), 'shortcut': 'Ctrl+M'})
+        section['items'].append({'title': _('Display Math Section'), 'shortcut': 'Ctrl+Shift+M'})
+        section['items'].append({'title': _('Equation'), 'shortcut': 'Ctrl+Shift+N'})
+        section['items'].append({'title': _('Subscript'), 'shortcut': 'Ctrl+Shift+D'})
+        section['items'].append({'title': _('Show position in preview'), 'shortcut': 'Ctrl+Shift+U'})
+        section['items'].append({'title': _('Fraction'), 'shortcut': 'Alt+Shift+F'})
+        section['items'].append({'title': '\\left', 'shortcut': 'Ctrl+Shift+L'})
+        section['items'].append({'title': '\\right', 'shortcut': 'Ctrl+Shift+R'})
         data.append(section)
 
         self.data = data
@@ -132,25 +132,7 @@ class KeyboardShortcutsDialog(object):
         self.view.present()
 
     def setup(self):
-        builder_string = '''<?xml version="1.0" encoding="UTF-8"?>
-<interface>
-
-  <object class="GtkShortcutsWindow" id="shortcuts-window">
-    <property name="modal">1</property>
-    <child>
-      <object class="GtkShortcutsSection">
-        <property name="visible">1</property>
-        <property name="section-name">shortcuts</property>
-        <property name="max-height">12</property>
-'''
-
-        for section in self.data:
-            builder_string += '''        <child>
-          <object class="GtkShortcutsGroup">
-            <property name="visible">1</property>
-            <property name="title" translatable="no">''' + section['title'] + '''</property>
-'''
-
+...
             for item in section['items']:
                 builder_string += '''            <child>
               <object class="GtkShortcutsShortcut">
@@ -160,19 +142,4 @@ class KeyboardShortcutsDialog(object):
               </object>
             </child>
 '''
-
-            builder_string += '''          </object>
-        </child>
-'''
-
-        builder_string += '''      </object>
-    </child>
-  </object>
-
-</interface>'''
-
-        builder = Gtk.Builder.new_from_string(builder_string, -1)
-        self.view = builder.get_object('shortcuts-window')
-        self.view.set_transient_for(self.main_window)
-        
-
+...

@@ -37,18 +37,38 @@ class KeybindParser:
 
     @classmethod
     def get_shortcut(cls, action_name, category=None):
-        """
-        Reverse lookup: find the shortcut for a given action name in a category.
-        If category is None, search all categories.
-        """
         cls.load_keybinds()
         if category:
-            categories = [category]
-        else:
-            categories = cls._keybinds.keys()
-            
-        for cat in categories:
-            for shortcut, action in cls._keybinds[cat].items():
-                if action == action_name:
-                    return shortcut
+            return cls._keybinds.get(category, {}).get(action_name)
+        
+        for cat_binds in cls._keybinds.values():
+            if action_name in cat_binds:
+                return cat_binds[action_name]
         return None
+
+    @classmethod
+    def to_gtk(cls, shortcut):
+        """Converts ['Ctrl', 'S'] to '<Control>s'"""
+        if not isinstance(shortcut, list):
+            return shortcut
+            
+        result = ""
+        for key in shortcut:
+            if key == 'Ctrl':
+                result += '<Control>'
+            elif key == 'Shift':
+                result += '<Shift>'
+            elif key == 'Alt':
+                result += '<Alt>'
+            elif key == 'Super':
+                result += '<Super>'
+            else:
+                result += key
+        return result
+
+    @classmethod
+    def to_display(cls, shortcut):
+        """Converts ['Ctrl', 'S'] to 'Ctrl+S'"""
+        if not isinstance(shortcut, list):
+            return str(shortcut)
+        return "+".join(shortcut)

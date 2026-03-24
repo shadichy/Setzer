@@ -37,7 +37,8 @@ class ShortcutControllerApp(ShortcutController):
         self.set_propagation_phase(Gtk.PropagationPhase.CAPTURE)
 
         app_keybinds = KeybindParser.get_category_keybinds('app')
-        for shortcut, action_name in app_keybinds.items():
+        for action_name, shortcut_array in app_keybinds.items():
+            shortcut = KeybindParser.to_gtk(shortcut_array)
             if action_name in self.actions.actions:
                 self.create_and_add_shortcut(shortcut, self.actions.actions[action_name].activate)
             elif hasattr(self, action_name):
