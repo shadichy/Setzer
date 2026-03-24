@@ -52,7 +52,14 @@ DEFAULT_KEYBINDS = {
         'undo': ['Ctrl', 'Z'],
         'redo': ['Ctrl', 'Shift', 'Z'],
         'redo_alt': ['Ctrl', 'Y'],
-        'show-context-menu': ['F12']
+        'show-context-menu': ['F12'],
+        'toggle-insert': ['Insert'],
+        'move-line-up': ['Alt', 'Up'],
+        'move-line-down': ['Alt', 'Down'],
+        'move-word-left': ['Alt', 'Left'],
+        'move-word-right': ['Alt', 'Right'],
+        'increment-number': ['Ctrl', 'Shift', 'A'],
+        'decrement-number': ['Ctrl', 'Shift', 'X']
     },
     'latex': {
         'toggle-comment': ['Ctrl', 'slash'],

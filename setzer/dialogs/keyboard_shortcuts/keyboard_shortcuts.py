@@ -92,13 +92,13 @@ class KeyboardShortcutsDialog(object):
         data.append(section)
 
         section = {'title': _('Editing'), 'items': list()}
-        section['items'].append({'title': _('Toggle insert / overwrite'), 'shortcut': 'Insert'})
-        section['items'].append({'title': _('Move current line up'), 'shortcut': 'Alt+Up'})
-        section['items'].append({'title': _('Move current line down'), 'shortcut': 'Alt+Down'})
-        section['items'].append({'title': _('Move current word left'), 'shortcut': 'Alt+Left'})
-        section['items'].append({'title': _('Move current word right'), 'shortcut': 'Alt+Right'})
-        section['items'].append({'title': _('Increment number at cursor'), 'shortcut': 'Ctrl+Shift+A'})
-        section['items'].append({'title': _('Decrement number at cursor'), 'shortcut': 'Ctrl+Shift+X'})
+        add_item(section, _('Toggle insert / overwrite'), 'toggle-insert', 'document')
+        add_item(section, _('Move current line up'), 'move-line-up', 'document')
+        add_item(section, _('Move current line down'), 'move-line-down', 'document')
+        add_item(section, _('Move current word left'), 'move-word-left', 'document')
+        add_item(section, _('Move current word right'), 'move-word-right', 'document')
+        add_item(section, _('Increment number at cursor'), 'increment-number', 'document')
+        add_item(section, _('Decrement number at cursor'), 'decrement-number', 'document')
         data.append(section)
 
         section = {'title': _('LaTeX Shortcuts'), 'items': list()}
