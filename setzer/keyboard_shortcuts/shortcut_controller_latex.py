@@ -52,7 +52,7 @@ class ShortcutControllerLaTeX(ShortcutController):
         self.set_accels_for_insert_symbol_action(['\\item •'], ['<Control><Shift>i'])
         self.set_accels_for_insert_symbol_action(['\\\\\n'], ['<Control>Return'])
 
-        self.create_and_add_shortcut('<Control>k', self.actions.toggle_comment)
+        self.create_and_add_shortcut('<Control>slash', self.actions.toggle_comment)
         self.create_and_add_shortcut('<Control>quotedbl', self.shortcut_quotes)
 
     def set_accels_for_insert_before_after_action(self, parameter, accels):
