@@ -14,8 +14,12 @@ class KeybindParser:
         if cls._keybinds is not None:
             return
             
-        # Initialize with a deep copy of defaults
-        cls._keybinds = {cat: dict(binds) for cat, binds in DEFAULT_KEYBINDS.items()}
+        try:
+            # Initialize with a deep copy of defaults
+            cls._keybinds = {cat: dict(binds) for cat, binds in DEFAULT_KEYBINDS.items()}
+        except Exception:
+            cls._keybinds = {}
+            return
         
         config_path = ServiceLocator.get_keymap_config_path()
         if config_path and os.path.exists(config_path):
@@ -29,6 +33,8 @@ class KeybindParser:
                                 cls._keybinds[category].update(binds)
             except Exception as e:
                 print(f"Failed to load keybinds from config file {config_path}: {e}")
+                # Reset to defaults if merging partially failed or corrupted state
+                cls._keybinds = {cat: dict(binds) for cat, binds in DEFAULT_KEYBINDS.items()}
 
     @classmethod
     def get_category_keybinds(cls, category):
