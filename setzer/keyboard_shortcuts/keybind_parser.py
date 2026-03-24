@@ -73,6 +73,15 @@ class KeybindParser:
         return result
 
     @classmethod
+    def to_gtk_display(cls, shortcut):
+        """Converts ['Ctrl', 'S'] to '<Control>s'"""
+        if not isinstance(shortcut, list):
+            return shortcut
+            
+        result = KeybindParser.to_gtk(shortcut).replace('<', '&lt;').replace('>', '&gt;')
+        return result
+
+    @classmethod
     def to_display(cls, shortcut):
         """Converts a shortcut array like ['Ctrl', 'slash'] to 'Ctrl+'/'"""
         if not isinstance(shortcut, list):

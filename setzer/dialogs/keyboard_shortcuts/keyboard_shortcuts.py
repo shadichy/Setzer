@@ -33,7 +33,7 @@ class KeyboardShortcutsDialog(object):
         def add_item(section, title, action_name, category=None):
             shortcut_array = KeybindParser.get_shortcut(action_name, category)
             if shortcut_array:
-                shortcut = KeybindParser.to_display(shortcut_array)
+                shortcut = KeybindParser.to_gtk_display(shortcut_array)
                 section['items'].append({'title': title, 'shortcut': shortcut})
 
         section = {'title': _('Documents'), 'items': list()}
@@ -134,4 +134,47 @@ class KeyboardShortcutsDialog(object):
         self.view.present()
 
     def setup(self):
-...
+        builder_string = '''<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+
+  <object class="GtkShortcutsWindow" id="shortcuts-window">
+    <property name="modal">1</property>
+    <child>
+      <object class="GtkShortcutsSection">
+        <property name="visible">1</property>
+        <property name="section-name">shortcuts</property>
+        <property name="max-height">12</property>
+'''
+
+        for section in self.data:
+            builder_string += '''        <child>
+          <object class="GtkShortcutsGroup">
+            <property name="visible">1</property>
+            <property name="title" translatable="no">''' + section['title'] + '''</property>
+'''
+
+            for item in section['items']:
+                builder_string += '''            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="visible">1</property>
+                <property name="accelerator">''' + item['shortcut'] + '''</property>
+                <property name="title" translatable="no">''' + item['title'] + '''</property>
+              </object>
+            </child>
+'''
+
+            builder_string += '''          </object>
+        </child>
+'''
+
+        builder_string += '''      </object>
+    </child>
+  </object>
+
+</interface>'''
+
+        builder = Gtk.Builder.new_from_string(builder_string, -1)
+        self.view = builder.get_object('shortcuts-window')
+        self.view.set_transient_for(self.main_window)
+        
+
