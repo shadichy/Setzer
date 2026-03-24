@@ -4,17 +4,17 @@
 # Note: For non-literal characters, use their descriptive names.
 # This is required for correct parsing by the GTK shortcut system.
 #
-# | Character | Name       |
-# | --------- | ---------- |
-# | ?         | question   |
-# | /         | slash      |
-# | +         | plus       |
-# | -         | minus      |
-# | "         | quotedbl   |
-# | Tab       | Tab        |
-# | Return    | Return     |
-# | Escape    | Escape     |
-# | Space     | space      |
+# | Character   | Name       |
+# | ----------- | ---------- |
+# | ?           | question   |
+# | /           | slash      |
+# | +           | plus       |
+# | -           | minus      |
+# | "           | quotedbl   |
+# | Tab         | Tab        |
+# | Enter       | Return     |
+# | Esc         | Escape     |
+# | Space (` `) | space      |
 
 DEFAULT_KEYBINDS = {
     'app': {

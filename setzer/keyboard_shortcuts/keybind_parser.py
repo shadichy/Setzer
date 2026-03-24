@@ -74,7 +74,29 @@ class KeybindParser:
 
     @classmethod
     def to_display(cls, shortcut):
-        """Converts ['Ctrl', 'S'] to 'Ctrl+S'"""
+        """Converts a shortcut array like ['Ctrl', 'slash'] to 'Ctrl+'/'"""
         if not isinstance(shortcut, list):
             return str(shortcut)
-        return "+".join(shortcut)
+        
+        formatted_keys = []
+        for i, key in enumerate(shortcut):
+            display_key = key
+            original_key_val = key # Store original to check for replacements later
+
+            # Apply specific key name conversions
+            display_key = display_key.replace('slash', "'/'")
+            display_key = display_key.replace('question', "'?'")
+            display_key = display_key.replace('plus', "'+'")
+            display_key = display_key.replace('minus', "'-'")
+            display_key = display_key.replace('quotedbl', "'\"'")
+            display_key = display_key.replace('Return', _('Enter'))
+
+            # Capitalize single letters after a modifier, if not a modifier itself
+            # Modifiers are typically 'Ctrl', 'Shift', 'Alt', 'Super'
+            if len(display_key) == 1 and display_key.isalpha() and i > 0 and \
+               shortcut[i-1] in ['Ctrl', 'Shift', 'Alt', 'Super']: 
+                formatted_keys.append(display_key.upper())
+            else:
+                formatted_keys.append(display_key)
+        
+        return "+".join(formatted_keys)
