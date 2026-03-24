@@ -40,7 +40,8 @@ class HeaderBar(Gtk.HeaderBar):
         self.symbols_toggle = Gtk.ToggleButton()
         self.symbols_toggle.set_child(Gtk.Image.new_from_icon_name('own-symbols-misc-text-symbolic'))
         self.symbols_toggle.set_can_focus(False)
-        self.symbols_toggle.set_tooltip_text(_('Toggle symbols') + ' (F3)')
+        symbols_shortcut = KeybindParser.to_display(KeybindParser.get_shortcut('shortcut_symbols_toggle', 'app'))
+        self.symbols_toggle.set_tooltip_text(_('Toggle symbols') + ' (' + symbols_shortcut + ')')
 
         self.sidebar_toggles_box = Gtk.Box.new(Gtk.Orientation.HORIZONTAL, 0)
         self.sidebar_toggles_box.append(self.document_structure_toggle)

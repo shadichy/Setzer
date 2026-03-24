@@ -9,6 +9,7 @@
 # | ?           | question   |
 # | /           | slash      |
 # | +           | plus       |
+# | =           | equal      |
 # | -           | minus      |
 # | "           | quotedbl   |
 # | Tab         | Tab        |
@@ -28,7 +29,7 @@ DEFAULT_KEYBINDS = {
         'shortcut_show_open_docs': ['Ctrl', 'P'],
         'shortcut_switch_document': ['Ctrl', 'Tab'],
         'shortcut_show_document_chooser': ['Ctrl', 'Shift', 'P'],
-        'zoom-in': ['Ctrl', 'plus'],
+        'zoom-in': ['Ctrl', 'equal'], # As in US keyboard, shift + equal is plus
         'zoom-out': ['Ctrl', 'minus'],
         'reset-zoom': ['Ctrl', '0'],
         'start-search': ['Ctrl', 'F'],
@@ -37,6 +38,7 @@ DEFAULT_KEYBINDS = {
         'find-previous': ['Shift', 'F3'],
         'shortcut_help': ['F1'],
         'shortcut_document_structure_toggle': ['F2'],
+        'shortcut_symbols_toggle': ['Alt', 'Y'],
         'save-and-build': ['Ctrl', 'Alt', 'B'],
         'build': ['F6'],
         'forward-sync': ['Ctrl', 'Alt', 'J'],

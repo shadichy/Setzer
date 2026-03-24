@@ -55,6 +55,8 @@ class KeyboardShortcutsDialog(object):
 
         section = {'title': 'Windows and Panels', 'items': list()}
         add_item(section, _('Show help panel'), 'shortcut_help', 'app')
+        add_item(section, _('Show document structure'), 'shortcut_document_structure_toggle', 'app')
+        add_item(section, _('Show symbols'), 'shortcut_symbols_toggle', 'app')
         add_item(section, _('Show build log'), 'shortcut_build_log', 'app')
         add_item(section, _('Show preview panel'), 'shortcut_preview', 'app')
         add_item(section, _('Show global menu'), 'shortcut_show_hamburger', 'app')
