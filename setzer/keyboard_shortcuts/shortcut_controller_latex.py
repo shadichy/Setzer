@@ -22,6 +22,7 @@ from gi.repository import Gtk, GLib, Gio
 from setzer.app.service_locator import ServiceLocator
 from setzer.keyboard_shortcuts.shortcut_controller import ShortcutController
 from setzer.popovers.popover_manager import PopoverManager
+from setzer.keyboard_shortcuts.keybind_parser import KeybindParser
 
 
 class ShortcutControllerLaTeX(ShortcutController):
@@ -52,8 +53,12 @@ class ShortcutControllerLaTeX(ShortcutController):
         self.set_accels_for_insert_symbol_action(['\\item •'], ['<Control><Shift>i'])
         self.set_accels_for_insert_symbol_action(['\\\\\n'], ['<Control>Return'])
 
-        self.create_and_add_shortcut('<Control>slash', self.actions.toggle_comment)
-        self.create_and_add_shortcut('<Control>quotedbl', self.shortcut_quotes)
+        latex_keybinds = KeybindParser.get_category_keybinds('latex')
+        for shortcut, action_name in latex_keybinds.items():
+            if action_name in self.actions.actions:
+                self.create_and_add_shortcut(shortcut, self.actions.actions[action_name].activate)
+            elif hasattr(self, action_name):
+                self.create_and_add_shortcut(shortcut, getattr(self, action_name))
 
     def set_accels_for_insert_before_after_action(self, parameter, accels):
         self.main_window.app.set_accels_for_action(Gio.Action.print_detailed_name('win.insert-before-after', GLib.Variant('as', parameter)), accels)
@@ -63,5 +68,3 @@ class ShortcutControllerLaTeX(ShortcutController):
 
     def shortcut_quotes(self, accel_group=None, window=None, key=None, mask=None):
         PopoverManager.popup_at_button('quotes_menu')
-
-
