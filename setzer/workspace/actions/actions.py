@@ -81,6 +81,11 @@ class Actions(object):
         self.add_action('increment-number', self.increment_number)
         self.add_action('decrement-number', self.decrement_number)
 
+        self.add_action('search-next', self.find_next)
+        self.add_action('search-previous', self.find_previous)
+        self.add_action('select-next-placeholder', self.select_next_placeholder)
+        self.add_action('select-previous-placeholder', self.select_previous_placeholder)
+
         self.add_action('zoom-in', self.zoom_in)
         self.add_action('zoom-out', self.zoom_out)
         self.add_action('reset-zoom', self.reset_zoom)
@@ -179,6 +184,10 @@ class Actions(object):
         self.actions['move-word-right'].set_enabled(document_active)
         self.actions['increment-number'].set_enabled(document_active)
         self.actions['decrement-number'].set_enabled(document_active)
+        self.actions['search-next'].set_enabled(document_active)
+        self.actions['search-previous'].set_enabled(document_active)
+        self.actions['select-next-placeholder'].set_enabled(document_active)
+        self.actions['select-previous-placeholder'].set_enabled(document_active)
         self.actions['start-search'].set_enabled(document_active)
         self.actions['start-search-and-replace'].set_enabled(document_active)
         self.actions['find-next'].set_enabled(document_active)
@@ -567,6 +576,14 @@ class Actions(object):
     def decrement_number(self, action=None, parameter=None):
         if self.workspace.get_active_document() == None: return
         self.workspace.get_active_document().source_view.emit('change-number', -1)
+
+    def select_next_placeholder(self, action=None, parameter=None):
+        if self.workspace.get_active_document() == None: return
+        self.workspace.get_active_document().select_next_placeholder()
+
+    def select_previous_placeholder(self, action=None, parameter=None):
+        if self.workspace.get_active_document() == None: return
+        self.workspace.get_active_document().select_previous_placeholder()
 
     def zoom_in(self, action=None, parameter=''):
         font_desc = Pango.FontDescription.from_string(FontManager.font_string)

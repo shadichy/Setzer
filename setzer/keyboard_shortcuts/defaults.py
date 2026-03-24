@@ -59,7 +59,11 @@ DEFAULT_KEYBINDS = {
         'move-word-left': ['Alt', 'Left'],
         'move-word-right': ['Alt', 'Right'],
         'increment-number': ['Ctrl', 'Shift', 'A'],
-        'decrement-number': ['Ctrl', 'Shift', 'X']
+        'decrement-number': ['Ctrl', 'Shift', 'X'],
+        'search-next': ['Ctrl', 'G'],
+        'search-previous': ['Ctrl', 'Shift', 'G'],
+        'select-next-placeholder': ['Tab'],
+        'select-previous-placeholder': ['Shift', 'Tab']
     },
     'latex': {
         'toggle-comment': ['Ctrl', 'slash'],

@@ -65,8 +65,8 @@ class KeyboardShortcutsDialog(object):
 
         section = {'title': _('Find and Replace'), 'items': list()}
         add_item(section, _('Find'), 'start-search', 'app')
-        add_item(section, _('Find the next match'), 'find-next', 'app')
-        add_item(section, _('Find the previous match'), 'find-previous', 'app')
+        add_item(section, _('Find the next match'), 'search-next', 'document')
+        add_item(section, _('Find the previous match'), 'search-previous', 'document')
         add_item(section, _('Find and Replace'), 'start-search-and-replace', 'app')
         data.append(section)
 
@@ -97,6 +97,8 @@ class KeyboardShortcutsDialog(object):
         add_item(section, _('Move current line down'), 'move-line-down', 'document')
         add_item(section, _('Move current word left'), 'move-word-left', 'document')
         add_item(section, _('Move current word right'), 'move-word-right', 'document')
+        add_item(section, _('Select next placeholder'), 'select-next-placeholder', 'document')
+        add_item(section, _('Select previous placeholder'), 'select-previous-placeholder', 'document')
         add_item(section, _('Increment number at cursor'), 'increment-number', 'document')
         add_item(section, _('Decrement number at cursor'), 'decrement-number', 'document')
         data.append(section)
