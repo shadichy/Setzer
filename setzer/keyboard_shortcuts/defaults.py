@@ -57,5 +57,25 @@ DEFAULT_KEYBINDS = {
     'latex': {
         'toggle-comment': ['Ctrl', 'slash'],
         'shortcut_quotes': ['Ctrl', 'quotedbl']
+    },
+    'latex-before-after': {
+        '\\\\textbf{@@}': ['Ctrl', 'B'],
+        '\\\\textit{@@}': ['Ctrl', 'I'],
+        '\\\\underline{@@}': ['Ctrl', 'U'],
+        '\\\\texttt{@@}': ['Ctrl', 'Shift', 'T'],
+        '\\\\emph{@@}': ['Ctrl', 'Shift', 'E'],
+        '$ @@ $': ['Ctrl', 'M'],
+        '\\\\[ @@ \\\\]': ['Ctrl', 'Shift', 'M'],
+        '\\\\begin{equation}\\n\\t@@\\n\\\\end{equation}': ['Ctrl', 'Shift', 'N'],
+        '\\\\begin{•}\\n\\t@@\\n\\\\end{•}': ['Ctrl', 'E'],
+        '_{@@}': ['Ctrl', 'Shift', 'D'],
+        '^{@@}': ['Ctrl', 'Shift', 'U']
+    },
+    'latex-symbol': {
+        '\\\\frac{•}{•}': ['Alt', 'Shift', 'F'],
+        '\\\\left •': ['Ctrl', 'Shift', 'L'],
+        '\\\\right •': ['Ctrl', 'Shift', 'R'],
+        '\\\\item •': ['Ctrl', 'Shift', 'I'],
+        '\\\\\\\\\\n': ['Ctrl', 'Return']
     }
 }

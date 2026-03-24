@@ -104,25 +104,25 @@ class KeyboardShortcutsDialog(object):
         section = {'title': _('LaTeX Shortcuts'), 'items': list()}
         add_item(section, _('Comment / Uncomment current line(s)'), 'toggle-comment', 'latex')
         add_item(section, _('Quotation Marks'), 'shortcut_quotes', 'latex')
-        section['items'].append({'title': _('New Line') + ' (\\\\)', 'shortcut': 'Ctrl+Return'})
-        section['items'].append({'title': _('Bold Text'), 'shortcut': 'Ctrl+B'})
-        section['items'].append({'title': _('Italic Text'), 'shortcut': 'Ctrl+I'})
-        section['items'].append({'title': _('Underlined Text'), 'shortcut': 'Ctrl+U'})
-        section['items'].append({'title': _('Typewriter Text'), 'shortcut': 'Ctrl+Shift+T'})
-        section['items'].append({'title': _('Emphasized Text'), 'shortcut': 'Ctrl+Shift+E'})
-        section['items'].append({'title': _('List Item'), 'shortcut': 'Ctrl+Shift+I'})
-        section['items'].append({'title': _('Environment'), 'shortcut': 'Ctrl+E'})
+        add_item(section, _('New Line') + ' (\\\\)', '\\\\\\\\\\n', 'latex-symbol')
+        add_item(section, _('Bold Text'), '\\\\textbf{@@}', 'latex-before-after')
+        add_item(section, _('Italic Text'), '\\\\textit{@@}', 'latex-before-after')
+        add_item(section, _('Underlined Text'), '\\\\underline{@@}', 'latex-before-after')
+        add_item(section, _('Typewriter Text'), '\\\\texttt{@@}', 'latex-before-after')
+        add_item(section, _('Emphasized Text'), '\\\\emph{@@}', 'latex-before-after')
+        add_item(section, _('List Item'), '\\\\item •', 'latex-symbol')
+        add_item(section, _('Environment'), '\\\\begin{•}\\n\\t@@\\n\\\\end{•}', 'latex-before-after')
         data.append(section)
 
         section = {'title': _('Math Shortcuts'), 'items': list()}
-        section['items'].append({'title': _('Inline Math Section'), 'shortcut': 'Ctrl+M'})
-        section['items'].append({'title': _('Display Math Section'), 'shortcut': 'Ctrl+Shift+M'})
-        section['items'].append({'title': _('Equation'), 'shortcut': 'Ctrl+Shift+N'})
-        section['items'].append({'title': _('Subscript'), 'shortcut': 'Ctrl+Shift+D'})
-        section['items'].append({'title': _('Show position in preview'), 'shortcut': 'Ctrl+Shift+U'})
-        section['items'].append({'title': _('Fraction'), 'shortcut': 'Alt+Shift+F'})
-        section['items'].append({'title': '\\left', 'shortcut': 'Ctrl+Shift+L'})
-        section['items'].append({'title': '\\right', 'shortcut': 'Ctrl+Shift+R'})
+        add_item(section, _('Inline Math Section'), '$ @@ $', 'latex-before-after')
+        add_item(section, _('Display Math Section'), '\\\\[ @@ \\\\]', 'latex-before-after')
+        add_item(section, _('Equation'), '\\\\begin{equation}\\n\\t@@\\n\\\\end{equation}', 'latex-before-after')
+        add_item(section, _('Subscript'), '_{@@}', 'latex-before-after')
+        add_item(section, _('Superscript'), '^{@@}', 'latex-before-after')
+        add_item(section, _('Fraction'), '\\\\frac{•}{•}', 'latex-symbol')
+        add_item(section, '\\left', '\\\\left •', 'latex-symbol')
+        add_item(section, '\\right', '\\\\right •', 'latex-symbol')
         data.append(section)
 
         self.data = data
@@ -132,14 +132,4 @@ class KeyboardShortcutsDialog(object):
         self.view.present()
 
     def setup(self):
-...
-            for item in section['items']:
-                builder_string += '''            <child>
-              <object class="GtkShortcutsShortcut">
-                <property name="visible">1</property>
-                <property name="accelerator">''' + item['shortcut'] + '''</property>
-                <property name="title" translatable="no">''' + item['title'] + '''</property>
-              </object>
-            </child>
-'''
 ...
